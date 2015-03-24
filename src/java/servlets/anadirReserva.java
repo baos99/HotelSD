@@ -45,11 +45,11 @@ public class anadirReserva extends HttpServlet {
         ArrayList<Huesped> huespedes =  (ArrayList<Huesped>) this.getServletContext().getAttribute("huespedes");
         ArrayList<Reserva> reservas = (ArrayList<Reserva>) this.getServletContext().getAttribute("reservas");
         
-        String nif =  request.getParameter("dniReserva");
+        String nif =  request.getParameter("nifReserva");
         String entrada = request.getParameter("dateEntrada");
         String salida =  request.getParameter("dateSalida");
         Huesped haux = null;
-        
+        /*
         Date entradad = null;
         Date salidad = null;
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -57,9 +57,9 @@ public class anadirReserva extends HttpServlet {
             entradad = df.parse(entrada);
             salidad = df.parse(salida);
         }catch (Exception e){}
-      
+      */
         //busqueda por dni, y se saca el objeto.
-         for (Huesped h : huespedes) {
+        for (Huesped h : huespedes) {
             if (nif.equalsIgnoreCase(h.getNif())) {
                 haux = h;
                 break;
@@ -68,13 +68,12 @@ public class anadirReserva extends HttpServlet {
         
         if (haux != null){ 
             int numHabitacion = (int) Math.floor(Math.random()*(599-100+1)+100);  
-            Reserva newReserva = new Reserva(haux, numHabitacion, entradad, salidad);
+            Reserva newReserva = new Reserva(haux, numHabitacion, entrada, salida);
         
             reservas.add(newReserva);
             
         }else{
             error = "Error. No se ha podido añadir el cliente";
-            System.out.println("Error. No se ha podido añadir el cliente");
         }
         
         request.setAttribute("reservas", reservas);

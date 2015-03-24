@@ -5,7 +5,7 @@
 	<div class="panel-body">
 	<form action="anadirReserva" method="post">
             <div class="form-group">
-                <label>DNI</label> <input type="text" name="dniReserva"
+                <label>DNI</label> <input type="text" name="nifReserva"
 				class="form-control" placeholder="DNI" required/>
             </div>
             <div class="form-group">

@@ -52,12 +52,12 @@ public class anadirHuesped extends HttpServlet {
         Integer i_movil;
         Integer i_codigo_postal= Integer.parseInt(codigo_postal);
         
-        if (telefono != ""){
+        if (!"".equals(telefono)){
             i_telefono= Integer.parseInt(telefono);
         }else{
             i_telefono = 0;
         }
-        if (movil != ""){
+        if (!"".equals(movil)){
             i_movil= Integer.parseInt(movil);
         }else{
             i_movil=0;

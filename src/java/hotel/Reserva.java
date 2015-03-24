@@ -10,10 +10,10 @@ public class Reserva {
   
     private Huesped cliente;
     private int habitacion;
-    private Date fentrada;
-    private Date fsalida;
+    private String fentrada;
+    private String fsalida;
     
-    public Reserva(Huesped cliente, int habitacion, Date fentrada, Date fsalida) {
+    public Reserva(Huesped cliente, int habitacion, String fentrada, String fsalida) {
         this.cliente = cliente;
         this.habitacion = habitacion;
         this.fentrada = fentrada;
@@ -36,19 +36,19 @@ public class Reserva {
         this.habitacion = habitacion;
     }
 
-    public Date getFentrada() {
+    public String getFentrada() {
         return fentrada;
     }
 
-    public void setFentrada(Date fentrada) {
+    public void setFentrada(String fentrada) {
         this.fentrada = fentrada;
     }
 
-    public Date getFsalida() {
+    public String getFsalida() {
         return fsalida;
     }
 
-    public void setFsalida(Date fsalida) {
+    public void setFsalida(String fsalida) {
         this.fsalida = fsalida;
     }
     

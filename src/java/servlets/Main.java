@@ -34,10 +34,10 @@ public class Main extends HttpServlet {
             throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
         
-         ArrayList<Reserva> actuales =  (ArrayList<Reserva>) this.getServletContext().getAttribute("actuales");
+         ArrayList<Reserva> reservas =  (ArrayList<Reserva>) this.getServletContext().getAttribute("reservas");
          ArrayList<Huesped> huespedes =  (ArrayList<Huesped>) this.getServletContext().getAttribute("huespedes");
        
-        request.setAttribute("reservas", actuales);
+        request.setAttribute("reservas", reservas);
         request.setAttribute("huespedes", huespedes); 
        
         //RequestDispatcher dispatcher = request.getRequestDispatcher("mostrarReservas.jsp");       
