@@ -39,7 +39,7 @@ public class ContextListener implements ServletContextListener {
         actuales.add(new Reserva(h3, 205, new Date(2015, 6, 14),new Date(2015, 6, 17)));
         
         
-        huespedes.add(h1);huespedes.add(h2);huespedes.add(h2);
+        huespedes.add(h1);huespedes.add(h2);huespedes.add(h3);
         
         sce.getServletContext().setAttribute("pasadas", pasadas);
         sce.getServletContext().setAttribute("actuales", actuales);

@@ -52,12 +52,12 @@ public class anadirHuesped extends HttpServlet {
         Integer i_movil;
         Integer i_codigo_postal= Integer.parseInt(codigo_postal);
         
-        if (telefono != null){
+        if (telefono != ""){
             i_telefono= Integer.parseInt(telefono);
         }else{
             i_telefono = 0;
         }
-        if (movil != null){
+        if (movil != ""){
             i_movil= Integer.parseInt(movil);
         }else{
             i_movil=0;
@@ -69,7 +69,7 @@ public class anadirHuesped extends HttpServlet {
 
         request.setAttribute("huespedes", huespedes);
         request.setAttribute("tab", "buscarHuesped"); 
-        response.sendRedirect("/HotelSD");
+        response.sendRedirect(request.getContextPath());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

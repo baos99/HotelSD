@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="tab-pane <c:if test="${tab=='buscarReserva'}">active</c:if>" id="buscarReserva">
+<div class="tab-pane <c:if test="${tab=='buscarReserva'}">active</c:if> " id="buscarReserva">
     <h2>reservaaaas</h2>
     
     <table border="1">

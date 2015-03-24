@@ -1,3 +1,4 @@
+
 <ul id="menu" class="nav nav-tabs" data-tabs="tabs">
         <li><a href="#administracion" data-toggle="tab">Administracion</a></li>
         <li><a href="#estadoHotel" data-toggle="tab">Estado Hotel</a></li>
