@@ -12,6 +12,14 @@
         <servlet-name>Main</servlet-name>
         <url-pattern>/Main</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>anadirHuesped</servlet-name>
+        <servlet-class>servlets.anadirHuesped</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>anadirHuesped</servlet-name>
+        <url-pattern>/anadirHuesped</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

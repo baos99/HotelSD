@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author german
  */
-@WebServlet(name = "anadirHuesped", urlPatterns = {"/anadirHuesped"})
 public class anadirHuesped extends HttpServlet {
 
     /**
@@ -43,7 +42,7 @@ public class anadirHuesped extends HttpServlet {
         String fecha = (String) request.getParameter("date");
         String direccion = (String) request.getParameter("dir");
         String localidad = (String) request.getParameter("loc");
-        String codigo_postal = (String) request.getParameter("acp");
+        String codigo_postal = (String) request.getParameter("cp");
         String provincia = (String) request.getParameter("prov");
         String movil = (String) request.getParameter("mov");
         String telefono = (String) request.getParameter("tel");        
@@ -68,7 +67,8 @@ public class anadirHuesped extends HttpServlet {
                 
         huespedes.add(newHuesped);
 
-        request.setAttribute("huespedes", huespedes); 
+        request.setAttribute("huespedes", huespedes);
+        request.setAttribute("tab", "buscarHuesped"); 
         response.sendRedirect("/HotelSD");
     }
 
