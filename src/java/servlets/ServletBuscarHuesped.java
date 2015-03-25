@@ -59,7 +59,7 @@ public class ServletBuscarHuesped extends HttpServlet {
                 }
             }
         }else{
-            error = "Error. No se ha podido añadir el cliente";
+            error = "Error. No se ha podido encontrar al cliente";
         }
          
         request.setAttribute("cliente", haux);
