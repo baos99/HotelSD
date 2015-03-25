@@ -8,6 +8,10 @@
         <servlet-name>Main</servlet-name>
         <servlet-class>servlets.Main</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>anadirReserva</servlet-name>
+        <servlet-class>servlets.anadirReserva</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Main</servlet-name>
         <url-pattern>/Main</url-pattern>
@@ -19,6 +23,10 @@
     <servlet-mapping>
         <servlet-name>anadirHuesped</servlet-name>
         <url-pattern>/anadirHuesped</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>anadirReserva</servlet-name>
+        <url-pattern>/anadirReserva</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,4 +1,5 @@
-<div class="tab-pane" id="anadirReserva">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<div class="tab-pane <c:if test="${tab=='anadirReserva'}">active</c:if>" id="anadirReserva">
     <div class="col-md-12" id="form">
         <h1>Nueva Reserva</h1>
 	<div class="panel panel-default">
