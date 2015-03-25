@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/german/NetBeansProjects/HotelSDFinal/web/administrarReservas.jsp</file>
-            <file>file:/home/german/NetBeansProjects/HotelSDFinal/src/java/servlets/ServletBuscarHuesped.java</file>
-            <file>file:/home/german/NetBeansProjects/HotelSDFinal/web/anadirHuesped.jsp</file>
-            <file>file:/home/german/NetBeansProjects/HotelSDFinal/web/buscarHuesped.jsp</file>
-            <file>file:/home/german/NetBeansProjects/HotelSDFinal/web/administrarHuespedes.jsp</file>
-            <file>file:/home/german/NetBeansProjects/HotelSDFinal/src/java/servlets/ServletModificarHuesped.java</file>
-            <file>file:/home/german/NetBeansProjects/HotelSDFinal/web/anadirReserva.jsp</file>
-            <file>file:/home/german/NetBeansProjects/HotelSDFinal/src/java/servlets/ServletBuscarReserva.java</file>
-            <file>file:/home/german/NetBeansProjects/HotelSDFinal/src/java/servlets/ServletBorrarHuesped.java</file>
-            <file>file:/home/german/NetBeansProjects/HotelSDFinal/src/java/servlets/ServletAnadirHuesped.java</file>
+            <file>file:/home/jesus/NetBeansProjects/HotelSD/web/header.jsp</file>
+            <file>file:/home/jesus/NetBeansProjects/HotelSD/src/java/servlets/ServletBuscarHuesped.java</file>
+            <file>file:/home/jesus/NetBeansProjects/HotelSD/web/index.jsp</file>
+            <file>file:/home/jesus/NetBeansProjects/HotelSD/src/java/cliente/ClienteNativo.java</file>
         </group>
     </open-files>
 </project-private>

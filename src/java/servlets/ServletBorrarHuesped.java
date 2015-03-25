@@ -42,18 +42,21 @@ public class ServletBorrarHuesped extends HttpServlet {
             String nif = request.getParameter("nif");
             for (Huesped h : huespedes) {
                 if (nif.equalsIgnoreCase(h.getNif())) {
-                    huespedes.remove(h);
+                    borrado = huespedes.remove(h);
                     break;
                 }
             }
             
-              if(borrado){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+              if(!borrado){
                 error = "Error. No se ha podido borrar el cliente";
+                
             }
             
             request.setAttribute("huespedes", huespedes);
             request.setAttribute("tab", "administrarHuespedes"); 
             request.setAttribute("error", error); 
-            response.sendRedirect(request.getContextPath());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");       
+            dispatcher.forward(request, response);
     }
 }
