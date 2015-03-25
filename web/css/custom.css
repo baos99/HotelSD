@@ -1,10 +1,18 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 25-mar-2015, 18:52:21
-    Author     : german
-*/
+body{
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9ee8fa), color-stop(100%,#d6f9ff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #9ee8fa 0%,#d6f9ff 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #9ee8fa 0%,#d6f9ff 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #9ee8fa 0%,#d6f9ff 100%); /* IE10+ */
+background: linear-gradient(to bottom, #9ee8fa 0%,#d6f9ff 100%); /* W3C */}
 
+h2 {
+    color: green;
+}
+
+title{
+    color: yellow;
+}
+
+.footer {
+    text-align: center;
+}

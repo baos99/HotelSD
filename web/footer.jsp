@@ -1,3 +1,3 @@
-        <p>Designed by Germán Alonso & Javier Jiménez.</p>
+        <p class = "footer"><b> Design by Germán Alonso & Javier Jimenez.</b></p>
     </body>
 </html>
