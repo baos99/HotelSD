@@ -54,9 +54,6 @@ public class ServletModificarHuesped extends HttpServlet {
                 haux.setApellidos(request.getParameter("surname"));
             } catch (Exception e) {}
             try {
-                haux.setNif(request.getParameter("nif"));
-            } catch (Exception e) {}
-            try {
                 haux.setDireccion(request.getParameter("dir"));
             } catch (Exception e) {}
             try {
@@ -73,7 +70,7 @@ public class ServletModificarHuesped extends HttpServlet {
             } catch (Exception e) {}
             try {
                 haux.setMovil(Integer.parseInt(request.getParameter("mov")));
-            } catch (Exception e) {}
+            } catch (Exception e) {haux.setMovil(666);}
             try {
                 haux.setMail(request.getParameter("email"));
             } catch (Exception e) {}
