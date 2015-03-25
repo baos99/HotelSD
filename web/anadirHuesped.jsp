@@ -4,7 +4,7 @@
         <h1>Nuevo Huesped</h1>
 	<div class="panel panel-default">
 	<div class="panel-body">
-	<form action="anadirHuesped" method="post">
+	<form action="ServletAnadirHuesped" method="post">
             <div class="form-group">
                 <label>Nombre</label> <input type="text" name="name"
 				class="form-control" placeholder="Nombre" required/>

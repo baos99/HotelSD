@@ -4,7 +4,7 @@
         <h1>Nueva Reserva</h1>
 	<div class="panel panel-default">
 	<div class="panel-body">
-	<form action="anadirReserva" method="post">
+	<form action="ServletAnadirReserva" method="post">
             <div class="form-group">
                 <label>DNI</label> <input type="text" name="nifReserva"
 				class="form-control" placeholder="DNI" required/>
