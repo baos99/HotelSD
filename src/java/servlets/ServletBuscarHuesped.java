@@ -65,8 +65,10 @@ public class ServletBuscarHuesped extends HttpServlet {
                     break;
                 }
             }
-        }else{
-            error = "Error. No se ha podido encontrar al cliente";
+        }
+        
+        if(haux ==null){
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
          
         if(format.equals("html")){
