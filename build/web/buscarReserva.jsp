@@ -9,7 +9,6 @@
                     <td><h3>Cliente</h3></td>
                     <td><h3>Fecha Entrada</h3></td>
                     <td><h3>Fecha Salida</h3></td>
-                    <td><h3>Opciones</h3></td>
                 </tr>
             </thead>
             <tbody>
@@ -19,16 +18,8 @@
                         <td>${reserva.cliente.nombre} ${reserva.cliente.apellidos}</td>
                         <td>${reserva.fentrada}</td>
                         <td>${reserva.fsalida}</td>
-                        <td>
-                            <form action="/Cancelar" method="GET">
-                                <input type="hidden" name="id" value="${status}">
-                                <button>Cancelar</button>
-                            </form>
-                        </td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
-    
-    
 </div>

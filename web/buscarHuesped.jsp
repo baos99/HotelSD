@@ -13,7 +13,6 @@
                     <td><h3>Telefono</h3></td>
                     <td><h3>Movil</h3></td>
                     <td><h3>Mail</h3></td>
-                    <td><h3>Opciones</h3></td>
                 </tr>
             </thead>
             <tbody>
@@ -28,16 +27,10 @@
                         <td>${huesped.telefono}</td>
                         <td>${huesped.movil}</td>
                         <td>${huesped.mail}</td>
-                        
-                        <td>
-                            <form action="Cancelar" method="GET">
-                                <input type="hidden" name="id" value="${status}">
-                                <button>Cancelar</button>
-                            </form>
-                        </td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
+    
     
 </div>         
