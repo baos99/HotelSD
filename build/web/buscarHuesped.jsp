@@ -7,7 +7,7 @@
                             <form action="ServletBuscarHuesped" method="get">
                                 <div class="form-group">
                                     <label>NIF</label> <input type="text" name="nif"
-				class="form-control" placeholder="NIF" required/>
+				class="form-control" placeholder="NIF" pattern="(\d{8})([A-Za-z]{1})" required/>
                                 </div>
                                 <button>Búscar</button>
                             </form>
@@ -16,9 +16,9 @@
                             <form action="ServletBuscarHuesped" method="get">
                                 <div class="form-group">
                                     <label for="name">Nombre</label> <input id="name" type="text" name="name"
-				class="form-control" placeholder="Nombre" required/>
+				class="form-control" placeholder="Nombre" pattern="([A-Za-z ]+)" required/>
                                     <label for="sur">Apellidos</label> <input id="sur" type="text" name="surname"
-				class="form-control" placeholder="Apellidos" required/>
+				class="form-control" placeholder="Apellidos" pattern="([A-Za-z ]+)" required/>
                                 </div>
                                 <button>Búscar</button>
                             </form>
@@ -32,19 +32,19 @@
 	<form action="ServletModificarHuesped" method="post">
             <div class="form-group">
                 <label>Nombre</label> <input type="text" name="name"
-				class="form-control" placeholder="Nombre" required value="${cliente.nombre}"/>
+				class="form-control" placeholder="Nombre"  pattern="([A-Za-z ]+)" required value="${cliente.nombre}"/>
             </div>
             <div class="form-group">
                 <label>Apellidos</label> <input type="text" name="surname"
-				class="form-control" placeholder="Apellidos" required value="${cliente.apellidos}"/>
+				class="form-control" placeholder="Apellidos"  pattern="([A-Za-z ]+)" required value="${cliente.apellidos}"/>
             </div>
             <div class="form-group">
-                <label>DNI</label> <input type="text" name="dni" class="form-control" placeholder="DNI" required disabled value="${cliente.nif}"/>
+                <label>DNI</label> <input type="text" name="dni" class="form-control" pattern="(\d{8})([A-Za-z]{1})" placeholder="DNI" required disabled value="${cliente.nif}"/>
                 <input type="hidden" name="nif" value="${cliente.nif}"/>
             </div>
             <div class="form-group">
                 <label>Fecha</label> <input type="text" name="date"
-				class="form-control" placeholder="Fecha" required value="${cliente.fecha}" />
+				class="form-control" placeholder="Fecha" pattern="(\d{2})(/)(\d{2})(/)(\d{4})" required value="${cliente.fecha}" />
             </div>
             <div class="form-group">
                 <label>Dirección</label> <input type="text" name="dir"
@@ -52,23 +52,23 @@
             </div>
              <div class="form-group">
                 <label>Localidad</label> <input type="text" name="loc"
-				class="form-control" placeholder="Localidad" required value="${cliente.localidad}"/>
+				class="form-control" placeholder="Localidad"  pattern="([A-Za-z ]+)" required value="${cliente.localidad}"/>
             </div>
              <div class="form-group">
-                <label>Codigo Postal</label> <input type="text" name="cp"
-				class="form-control" placeholder="Codigo Postal" required value="${cliente.codigo_postal}"/>
+                <label>Codigo Postal</label> <input type="text" name="cp" pattern="([A-Za-z ]+)"
+				class="form-control" placeholder="Codigo Postal" pattern="(\d{5})" required value="${cliente.codigo_postal}"/>
             </div>
              <div class="form-group">
                 <label>Provincia</label> <input type="text" name="prov"
-				class="form-control" placeholder="Provincia" required value="${cliente.provincia}"/>
+				class="form-control" placeholder="Provincia"  pattern="([A-Za-z ]+)"  required value="${cliente.provincia}"/>
             </div>
             <div class="form-group">
                 <label>Movil</label> <input type="text" name="mov"
-				class="form-control" placeholder="movil" value="${cliente.movil}"/>
+				class="form-control" placeholder="movil" pattern="(\d{9})" value="${cliente.movil}"/>
             </div>
             <div class="form-group">
                 <label>Telefono</label> <input type="text" name="tel"
-				class="form-control" placeholder="Telefono" value="${cliente.telefono}"/>
+				class="form-control" placeholder="Telefono"  pattern="(\d{9})" value="${cliente.telefono}"/>
             </div>
             <div class="form-group">
                 <label>E-mail</label> <input type="text" name="email"

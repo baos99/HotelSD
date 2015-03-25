@@ -51,7 +51,7 @@ public class ServletBuscarHuesped extends HttpServlet {
         
         format = (form==null ? format:form );
         
-        if (!nif.isEmpty()) {
+        if (nif!=null) {
             for (Huesped h : huespedes) {
                 if (request.getParameter("nif").equalsIgnoreCase(h.getNif())) {
                     haux = h;

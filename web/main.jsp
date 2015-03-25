@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/header.jsp" charEncoding="utf-8"/>
 
-<h2>Hotel Margaaaaaaaaaaaaaaaaaaaaaaaaa</h2>
+<h2>Hotel Sin Nombre</h2>
 <div id="content">
 <c:import url="/menu.jsp" charEncoding="utf-8"/>
 
