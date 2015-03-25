@@ -49,7 +49,7 @@ public class ServletBuscarHuesped extends HttpServlet {
         
         String form = request.getParameter("format");
         
-        format = (form.isEmpty() ? format:form );
+        format = (form==null ? format:form );
         
         if (!nif.isEmpty()) {
             for (Huesped h : huespedes) {
@@ -79,12 +79,12 @@ public class ServletBuscarHuesped extends HttpServlet {
         }else{
             response.setContentType("text/xml;charset=UTF-8");
             try(PrintWriter out = response.getWriter()){
-            XStream xstream = new XStream(new DomDriver());
-            xstream.alias("cliente", Huesped.class);
-            xstream.toXML(haux, out);
-        }catch(Exception e){
+                XStream xstream = new XStream(new DomDriver());
+                xstream.alias("cliente", Huesped.class);
+                xstream.toXML(haux, out);
+            }catch(Exception e){
             
-        };
+            };
         }
            
     }

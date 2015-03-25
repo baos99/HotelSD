@@ -6,6 +6,8 @@
 
 package servlets;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import hotel.Huesped;
 import hotel.Reserva;
 import java.io.IOException;
@@ -35,7 +37,12 @@ public class ServletBuscarReserva extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
-        response.setContentType("text/html;charset=UTF-8");
+        String format = "html";
+        
+        String form = request.getParameter("format");
+        
+        format = (form==null ? format:form );
+        
         String error = null;
         ArrayList<Reserva> reservas = (ArrayList<Reserva>) this.getServletContext().getAttribute("reservas");
      
@@ -51,13 +58,23 @@ public class ServletBuscarReserva extends HttpServlet {
             error = "Error. No se ha podido encontrar la reserva";
         }
         }
-         
-        request.setAttribute("reserva", raux);
-        request.setAttribute("tab", "buscarReserva"); 
-        request.setAttribute("error", error); 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");       
-        dispatcher.forward(request, response);
-        
+        if(format.equals("html")){
+            response.setContentType("text/html;charset=UTF-8");
+            request.setAttribute("reserva", raux);
+            request.setAttribute("tab", "buscarReserva"); 
+            request.setAttribute("error", error); 
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");       
+            dispatcher.forward(request, response);
+        }else{
+            response.setContentType("text/xml;charset=UTF-8");
+            try(PrintWriter out = response.getWriter()){
+                XStream xstream = new XStream(new DomDriver());
+                xstream.alias("reserva", Reserva.class);
+                xstream.toXML(raux, out);
+            }catch(Exception e){
+            
+            };
+        }
     }
         
         
