@@ -9,7 +9,3 @@
         <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
     </head>
     <body>
-        <c:if test="${error != null}">
-            <div class="alert alert-danger" role="alert">${error}</div>
-        </c:if>   
-            

@@ -9,10 +9,8 @@ package servlets;
 import hotel.Huesped;
 import hotel.Reserva;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -79,7 +77,10 @@ public class ServletAnadirReserva extends HttpServlet {
         request.setAttribute("reservas", reservas);
         request.setAttribute("tab", "anadirReserva"); 
         request.setAttribute("error", error); 
-        response.sendRedirect(request.getContextPath());
+       
+       RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");       
+       
+       dispatcher.forward(request, response);
        
         
         

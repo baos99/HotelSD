@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="tab-pane" <c:if test="${tab=='administrarHuespedes'}">active</c:if> id="administrarHuespedes">
+<div class="tab-pane" <c:if test="${tab=='administrarHuespedes' || tab==null}">active</c:if> id="administrarHuespedes">
     
     <div class="panel-body">
     <form action="ServletBorrarHuesped" method="POST">
