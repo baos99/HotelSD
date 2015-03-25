@@ -6,6 +6,8 @@
 
 package servlets;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import hotel.Huesped;
 import hotel.Reserva;
 import java.io.IOException;
@@ -35,7 +37,8 @@ public class ServletBuscarHuesped extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        
+        String format = "html";
         Huesped haux = null;
         String error = null;
         ArrayList<Huesped> huespedes =  (ArrayList<Huesped>) this.getServletContext().getAttribute("huespedes");
@@ -43,7 +46,11 @@ public class ServletBuscarHuesped extends HttpServlet {
      
         String nif = request.getParameter("nif");
         String name = request.getParameter("name");
-
+        
+        String form = request.getParameter("format");
+        
+        format = (form.isEmpty() ? format:form );
+        
         if (!nif.isEmpty()) {
             for (Huesped h : huespedes) {
                 if (request.getParameter("nif").equalsIgnoreCase(h.getNif())) {
@@ -62,11 +69,23 @@ public class ServletBuscarHuesped extends HttpServlet {
             error = "Error. No se ha podido encontrar al cliente";
         }
          
-        request.setAttribute("cliente", haux);
-        request.setAttribute("tab", "buscarHuesped"); 
-        request.setAttribute("error", error); 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");       
-        dispatcher.forward(request, response);
+        if(format.equals("html")){
+            response.setContentType("text/html;charset=UTF-8");
+            request.setAttribute("cliente", haux);
+            request.setAttribute("tab", "buscarHuesped"); 
+            request.setAttribute("error", error); 
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");       
+            dispatcher.forward(request, response);
+        }else{
+            response.setContentType("text/xml;charset=UTF-8");
+            try(PrintWriter out = response.getWriter()){
+            XStream xstream = new XStream(new DomDriver());
+            xstream.alias("cliente", Huesped.class);
+            xstream.toXML(haux, out);
+        }catch(Exception e){
+            
+        };
+        }
            
     }
 

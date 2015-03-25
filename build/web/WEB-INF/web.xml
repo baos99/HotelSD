@@ -37,10 +37,6 @@
         <servlet-class>servlets.ServletBuscarHuesped</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletBuscarHuesped2XML</servlet-name>
-        <servlet-class>servlets.ServletBuscarHuesped2XML</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ServletBuscarReserva</servlet-name>
         <servlet-class>servlets.ServletBuscarReserva</servlet-class>
     </servlet>
@@ -67,10 +63,6 @@
     <servlet-mapping>
         <servlet-name>ServletBuscarHuesped</servlet-name>
         <url-pattern>/ServletBuscarHuesped</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletBuscarHuesped2XML</servlet-name>
-        <url-pattern>/ServletBuscarHuesped2XML</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletBuscarReserva</servlet-name>
