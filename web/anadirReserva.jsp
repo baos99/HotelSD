@@ -7,15 +7,15 @@
 	<form action="ServletAnadirReserva" method="post">
             <div class="form-group">
                 <label>DNI</label> <input type="text" name="nifReserva"
-				class="form-control" placeholder="DNI" required/>
+				class="form-control" placeholder="DNI" pattern="(\d{8})([A-Za-z]{1})" required/>
             </div>
             <div class="form-group">
                 <label>Fecha Entrada</label> <input type="text" name="dateEntrada"
-				class="form-control" placeholder="Fecha Entrada" required/>
+				class="form-control" placeholder="Fecha Entrada" pattern="(\d{2})(/)(\d{2})(/)(\d{4})" required/>
             </div>
             <div class="form-group">
                 <label>Fecha Salida</label> <input type="text" name="dateSalida"
-				class="form-control" placeholder="Fecha Salida" required/>
+				class="form-control" placeholder="Fecha Salida" pattern="(\d{2})(/)(\d{2})(/)(\d{4})" required/>
             </div>
           
 

@@ -6,9 +6,9 @@
                             <form action="ServletBuscarReserva" method="get">
                                 <div class="form-group">
                                     <label>NIF</label> <input type="text" name="nif"
-				class="form-control" placeholder="NIF" required/>
+				class="form-control" placeholder="NIF" pattern="(\d{8})([A-Za-z]{1})" required/>
                                     <label>Fecha de entrada</label> <input type="text" name="fentrada"
-				class="form-control" placeholder="Fecha de entrada" required/>
+				class="form-control" placeholder="Fecha de entrada" pattern="(\d{2})(/)(\d{2})(/)(\d{4})" required/>
                                 </div>
                                 <button>Búscar</button>
                             </form>
@@ -22,7 +22,7 @@
 	<form action="ServletModificarReserva" method="post">
             <div class="form-group">
                 <label>Número habitacion</label> <input type="text" name="numHab"
-				class="form-control" placeholder="Número habitacion" required value="${reserva.habitacion}"/>
+				class="form-control" placeholder="Número habitacion" pattern="(\d+)"  required value="${reserva.habitacion}"/>
             </div>
             <div class="form-group">
                 <label>Nombre Cliente</label> <input type="text" name="name"
@@ -30,11 +30,11 @@
             </div>
             <div class="form-group">
                 <label>Fecha de entrada</label> <input type="text" name="fentrada"
-				class="form-control" placeholder="Fecha de entrada" required value="${reserva.fentrada}"/>
+				class="form-control" placeholder="Fecha de entrada" pattern="(\d{2})(/)(\d{2})(/)(\d{4})" required value="${reserva.fentrada}"/>
             </div>
             <div class="form-group">
                 <label>Fecha de salida</label> <input type="text" name="fsalda"
-				class="form-control" placeholder="Fecha de salida" required value="${reserva.fsalida}"/>
+				class="form-control" placeholder="Fecha de salida" pattern="(\d{2})(/)(\d{2})(/)(\d{4})" required value="${reserva.fsalida}"/>
             </div>
             <button type="submit" class="btn btn-success pull-right">
                 Modificar Reserva <span class="glyphicon glyphicon glyphicon-plus"	aria-hidden="true"></span>
