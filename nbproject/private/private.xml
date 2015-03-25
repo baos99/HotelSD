@@ -4,7 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/jesus/NetBeansProjects/HotelSD/src/java/servlets/ServletAnadirHuesped.java</file>
+            <file>file:/home/jesus/NetBeansProjects/HotelSD/src/conf/MANIFEST.MF</file>
             <file>file:/home/jesus/NetBeansProjects/HotelSD/src/java/servlets/ServletBorrarHuesped.java</file>
+            <file>file:/home/jesus/NetBeansProjects/HotelSD/src/java/servlets/context/ContextListener.java</file>
             <file>file:/home/jesus/NetBeansProjects/HotelSD/src/java/servlets/ServletModificarHuesped.java</file>
             <file>file:/home/jesus/NetBeansProjects/HotelSD/src/java/cliente/ClienteNativo.java</file>
         </group>
