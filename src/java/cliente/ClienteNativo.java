@@ -13,9 +13,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -23,10 +26,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static javax.servlet.SessionTrackingMode.URL;
 
-/**
- *
- * @author Oscar
- */
 public class ClienteNativo {
 
     static Pattern NOMBRE = Pattern.compile("[A-Za-záéíóúÁÉÍÓÚñÑ ]+");
@@ -85,11 +84,7 @@ public class ClienteNativo {
         if (!nif.isEmpty()) {
 
             HttpURLConnection urlConn;
-            URL url;
-            DataOutputStream os;
-            DataInputStream input;
-
-            url = new URL("http://localhost:8080/HotelSD/ServletBuscarHuesped?format=xml&nif=" + nif);
+            URL url = new URL("http://localhost:8080/HotelSD/ServletBuscarHuesped?format=xml&nif=" + nif);
 
             try {
                 urlConn = (HttpURLConnection) url.openConnection();
@@ -120,9 +115,78 @@ public class ClienteNativo {
         }
     }
     
-    static void mostrarCliente(Huesped huesped) {
+    static void buscarClienteNombreApellidos() throws MalformedURLException {
+        String name;
+        System.out.print("\n\nIntroduzca el Nombre del cliente [INTRO para Atrás]: ");
+        Scanner sc = new Scanner(System.in);
+        name = sc.nextLine();
+
+        mat = NOMBRE.matcher(name);
+
+        while (!(mat.matches())) {
+            if(name.isEmpty()){
+                break;
+            }else{
+               System.out.print("\nERROR. Nombre nválido, por favor introduzcalo de nuevo: ");
+               name = sc.nextLine();
+               mat = NOMBRE.matcher(name); 
+            }
+            
+        }
         
-        String aux = "  == DATOS DEL CLIENTE ==\n";
+        
+        if (!name.isEmpty()) {
+            
+            String surname;
+            System.out.print("\n\nIntroduzca los apellidos del cliente: ");
+            surname = sc.nextLine();
+
+            mat = NOMBRE.matcher(surname);
+
+            while (!(mat.matches())) {
+                   System.out.print("\nERROR. Apellidos inválidos, por favor introduzcalo de nuevo: ");
+                   surname = sc.nextLine();
+                   mat = NOMBRE.matcher(surname); 
+
+            }
+            
+            surname = surname.replace(' ', '+');
+
+            HttpURLConnection urlConn;
+            URL url = new URL("http://localhost:8080/HotelSD/ServletBuscarHuesped?format=xml&name=" + name + "&surname="+surname);
+
+            try {
+                urlConn = (HttpURLConnection) url.openConnection();
+                urlConn.setRequestMethod("GET");
+                urlConn.setDoInput(true);
+                urlConn.setDoOutput(true);
+                urlConn.setUseCaches(false);
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                XStream xstream = new XStream(new DomDriver());
+                xstream.alias("cliente", Huesped.class);
+
+                Huesped aux = (Huesped) xstream.fromXML(response.toString());
+                in.close();
+
+                mostrarCliente(aux);
+
+            } catch (IOException e) {
+                System.out.println("Fallo de connexxion: " + e.toString());
+            }
+        }
+    }
+    
+    static void mostrarCliente(Huesped huesped) throws MalformedURLException {
+        
+        String aux = "\n\n  == DATOS DEL CLIENTE ==\n";
         
         
         aux += "Nombre:" + huesped.getNombre();
@@ -147,26 +211,207 @@ public class ClienteNativo {
         
         aux += "\n\n ¿Qué desea hacer?\n";
         aux += "\n     1) Modificar";
-        aux += "\n     2) Salir";
+        aux += "\n     2) Borrar";
         aux += "\n\n     0) Arás\n";
         aux += "\nPor favor, escoga una accion: ";
         
         Scanner sc = new Scanner(System.in);
-        while(!opcion.equals("0") && !opcion.equals("1") && !opcion.equals("2")){
+        opcion="-1";
+        while(! (opcion.equals("0") || opcion.equals("1") ||opcion.equals("2"))){
             System.out.print(aux);
             opcion = sc.nextLine();
             switch (opcion) {
-                case "1":break;
-                case "2":break;
-                case "0":break;
+                case "1":modificarCliente(huesped);break;
+                case "2":borrarCliente(huesped);break;
+                case "0":opcion="-1";break;
                 default:System.out.println("Opción incorrecta");break;
             }
                 
         }
+   
+    }
+    
+    public static void modificarCliente(Huesped huesped) throws MalformedURLException{
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.print("\nIntroduzca el nombre ["+huesped.getNombre()+"]:");
+        String nombre = sc.nextLine();
+        
+        if(nombre.isEmpty()){
+            nombre = huesped.getNombre();
+        }
+        mat = NOMBRE.matcher(nombre);
+        while (!(mat.matches())) {
+            System.out.println("Nombre incorrecto ["+huesped.getNombre()+"]:");
+            nombre = sc.nextLine();
+            mat = NOMBRE.matcher(nombre);
+        }
+        
+        System.out.print("\nIntroduzca los apellidos ["+huesped.getApellidos()+"]:");
+        String apellidos = sc.nextLine();
+        if(apellidos.isEmpty()){
+            apellidos = huesped.getApellidos();
+        }
+        mat = NOMBRE.matcher(apellidos);
+        while (!(mat.matches())) {
+            System.out.print("\nApellidos incorrectos ["+huesped.getApellidos()+"]:");
+            apellidos = sc.nextLine();
+            mat = NOMBRE.matcher(apellidos);
+        }
+        String nif = huesped.getNif();
+        
+        System.out.print("\nIntroduzca la fecha de nacimiento ["+huesped.getFecha()+"]:");
+        String fecha = sc.nextLine();
+        if(fecha.isEmpty()){
+            fecha = huesped.getFecha();
+        }
+        
+        
+        System.out.print("\nIntroduzca la direccion ["+huesped.getDireccion()+"]:");
+        String direccion = sc.nextLine();
+        if(direccion.isEmpty()){
+            direccion = huesped.getDireccion();
+        }
+        
+        mat = NOMBRE.matcher(direccion);
+        while (!(mat.matches())) {
+            System.out.print("\nDireccion incorrecta ["+huesped.getDireccion()+"]:");
+            direccion = sc.nextLine();
+            mat = NOMBRE.matcher(direccion);
+        }
+        
+        System.out.print("\nIntroduzca la provincia ["+huesped.getProvincia()+"]:");
+        String provincia = sc.nextLine();
+        if(provincia.isEmpty()){
+            provincia = huesped.getProvincia();
+        }
+        
+        mat = NOMBRE.matcher(provincia);
+        while (!(mat.matches())) {
+            System.out.print("\nProvincia incorrecta ["+huesped.getProvincia()+"]:");
+            provincia = sc.nextLine();
+            mat = NOMBRE.matcher(provincia);
+        }
+        
+        System.out.print("\nIntroduzca el codigo postal ["+huesped.getCodigo_postal()+"]:");
+        String codpost = sc.nextLine();
+        
+        if(codpost.isEmpty()){
+            codpost = huesped.getCodigo_postal()+"";
+        }
+        
+        mat = CP.matcher(codpost);
+        while (!(mat.matches())) {
+            System.out.print("\nCP incorrecto ["+huesped.getCodigo_postal()+"]:");
+            codpost = sc.nextLine();
+            mat = CP.matcher(codpost);
+        }
+        
+        System.out.print("\nIntroduzca la localidad ["+huesped.getLocalidad()+"]:");
+        String localidad = sc.nextLine();
+        if(localidad.isEmpty()){
+            localidad = huesped.getLocalidad();
+        }
+        
+        mat = NOMBRE.matcher(localidad);
+        while (!(mat.matches())) {
+            System.out.print("\nLocalidad incorrecta ["+huesped.getLocalidad()+"]:");
+            localidad = sc.nextLine();
+            mat = NOMBRE.matcher(localidad);
+        }
+        
+        
+        System.out.print("\nIntroduzca el fijo ["+huesped.getTelefono()+"]:");
+        String fijo = sc.nextLine();
+
+        mat = TLFN.matcher(fijo);
+        while (!(mat.matches()) && fijo != "") {
+            System.out.print("\n Número de telefono incorrecto");
+            fijo = sc.nextLine();
+            mat = TLFN.matcher(fijo);
+        }
+        System.out.print("\nIntroduzca el movil ["+huesped.getMovil()+"]:");
+        String movil = sc.nextLine();
+        mat = TLFN.matcher(movil);
+        while (!(mat.matches()) && movil.isEmpty()) {
+            System.out.print("\nNúmero de telefono incorrecto: ");
+            movil = sc.nextLine();
+            mat = TLFN.matcher(movil);
+        }
+        System.out.print("\nIntroduzca el correo ["+huesped.getMail()+"]:");
+        String correo = sc.nextLine();
+        mat = MAIL.matcher(correo);
+        while (!(mat.matches()) && correo.isEmpty()) {
+            System.out.print("\nCorreo Incorrecto: ");
+            correo = sc.nextLine();
+            mat = MAIL.matcher(correo);
+        }
+        
+        URL    url            = new URL("http://localhost:8080/HotelSD/ServletModificarHuesped");
+        
+            try {
+                
+
+                String urlParameters  = "nif="+huesped.getNif()+"&name="+nombre+"&surname="+apellidos+"&date"+fecha+"&dir="+direccion+"&loc="+localidad+"&cp="+codpost+"&prov="+provincia+"&mov"+movil+"&tel"+fijo+"&email="+correo;
+                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                conn.setFollowRedirects(false);
+                conn.setDoOutput(true);
+
+            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+
+            writer.write(urlParameters);
+            writer.flush();
+
+            String line;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            writer.close();
+            reader.close();
+
+            } catch (IOException e) {
+                
+            }
+            
+        
         
         
     }
     
+    public static void borrarCliente(Huesped huesped) throws MalformedURLException{
+            URL    url            = new URL("http://localhost:8080/HotelSD/ServletBorrarHuesped");
+        
+            try {
+                
+
+                String urlParameters  = "nif="+huesped.getNif();
+                HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                conn.setFollowRedirects(false);
+                conn.setDoOutput(true);
+
+            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+
+            writer.write(urlParameters);
+            writer.flush();
+
+            String line;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            writer.close();
+            reader.close();
+
+            } catch (IOException e) {
+                
+            }
+            
+            
+            
+    }
     
     public static void main(String argv[]) throws MalformedURLException {
         
@@ -182,7 +427,7 @@ public class ClienteNativo {
                         opcion = sc.nextLine();
                         switch (opcion) {
                             case "1":buscarClienteNIF();break;
-                            case "2":break;
+                            case "2":buscarClienteNombreApellidos();break;
                             default:System.out.println("Opción incorrecta");break;
                         }
                     //buscarCliente();
