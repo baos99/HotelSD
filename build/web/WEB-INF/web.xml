@@ -5,28 +5,76 @@
         <listener-class>servlets.context.ContextListener</listener-class>
     </listener>
     <servlet>
-        <servlet-name>Main</servlet-name>
+        <servlet-name>ServletMain</servlet-name>
         <servlet-class>servlets.ServletMain</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>anadirReserva</servlet-name>
-        <servlet-class>servlets.ServleAnadirReserva</servlet-class>
+        <servlet-name>ServletBorrarHuesped</servlet-name>
+        <servlet-class>servlets.ServletBorrarHuesped</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Main</servlet-name>
-        <url-pattern>/Main</url-pattern>
-    </servlet-mapping>
     <servlet>
-        <servlet-name>anadirHuesped</servlet-name>
+        <servlet-name>ServletBorrarReserva</servlet-name>
+        <servlet-class>servlets.ServletBorrarReserva</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletModificarHuesped</servlet-name>
+        <servlet-class>servlets.ServletModificarHuesped</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletModificarReserva</servlet-name>
+        <servlet-class>servlets.ServletModificarReserva</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAnadirHuesped</servlet-name>
         <servlet-class>servlets.ServletAnadirHuesped</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletAnadirReserva</servlet-name>
+        <servlet-class>servlets.ServletAnadirReserva</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletBuscarHuesped</servlet-name>
+        <servlet-class>servlets.ServletBuscarHuesped</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletBuscarReserva</servlet-name>
+        <servlet-class>servlets.ServletBuscarReserva</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>anadirHuesped</servlet-name>
-        <url-pattern>/anadirHuesped</url-pattern>
+        <servlet-name>ServletMain</servlet-name>
+        <url-pattern>/ServletMain</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>anadirReserva</servlet-name>
-        <url-pattern>/anadirReserva</url-pattern>
+        <servlet-name>ServletBorrarHuesped</servlet-name>
+        <url-pattern>/ServletBorrarHuesped</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletBorrarReserva</servlet-name>
+        <url-pattern>/ServletBorrarReserva</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletModificarHuesped</servlet-name>
+        <url-pattern>/ServletModificarHuesped</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletModificarReserva</servlet-name>
+        <url-pattern>/ServletModificarReserva</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletBuscarHuesped</servlet-name>
+        <url-pattern>/ServletBuscarHuesped</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletBuscarReserva</servlet-name>
+        <url-pattern>/ServletBuscarReserva</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAnadirHuesped</servlet-name>
+        <url-pattern>/ServletAnadirHuesped</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAnadirReserva</servlet-name>
+        <url-pattern>/ServletAnadirReserva</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -34,6 +82,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>Main</welcome-file>
+        <welcome-file>main.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

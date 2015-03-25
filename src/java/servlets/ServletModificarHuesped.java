@@ -10,11 +10,9 @@ import hotel.Huesped;
 import hotel.Reserva;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,8 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author german
  */
-@WebServlet(name = "anadirReserva", urlPatterns = {"/anadirReserva"})
-public class ServleAnadirReserva extends HttpServlet {
+public class ServletModificarHuesped extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,51 +34,60 @@ public class ServleAnadirReserva extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        
         
         response.setContentType("text/html;charset=UTF-8");
-     
-        String error = null;
         ArrayList<Huesped> huespedes =  (ArrayList<Huesped>) this.getServletContext().getAttribute("huespedes");
         ArrayList<Reserva> reservas = (ArrayList<Reserva>) this.getServletContext().getAttribute("reservas");
-        
-        String nif =  request.getParameter("nifReserva");
-        String entrada = request.getParameter("dateEntrada");
-        String salida =  request.getParameter("dateSalida");
+        String nif = request.getParameter("nif");
         Huesped haux = null;
-        /*
-        Date entradad = null;
-        Date salidad = null;
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        try{
-            entradad = df.parse(entrada);
-            salidad = df.parse(salida);
-        }catch (Exception e){}
-      */
-        //busqueda por dni, y se saca el objeto.
         for (Huesped h : huespedes) {
             if (nif.equalsIgnoreCase(h.getNif())) {
                 haux = h;
                 break;
             }
-        }
+        } 
+            try {
+                haux.setNombre(request.getParameter("name"));
+            } catch (Exception e) {}
+            try {
+                haux.setApellidos(request.getParameter("surname"));
+            } catch (Exception e) {}
+            try {
+                haux.setNif(request.getParameter("nif"));
+            } catch (Exception e) {}
+            try {
+                haux.setDireccion(request.getParameter("dir"));
+            } catch (Exception e) {}
+            try {
+                haux.setLocalidad(request.getParameter("loc"));
+            } catch (Exception e) {}
+            try {
+                haux.setCodigo_postal(Integer.parseInt(request.getParameter("cp")));
+            } catch (Exception e) {}
+            try {
+                haux.setProvincia(request.getParameter("prov"));
+            } catch (Exception e) {}
+            try {
+                haux.setTelefono(Integer.parseInt(request.getParameter("tel")));
+            } catch (Exception e) {}
+            try {
+                haux.setMovil(Integer.parseInt(request.getParameter("mov")));
+            } catch (Exception e) {}
+            try {
+                haux.setMail(request.getParameter("email"));
+            } catch (Exception e) {}
+           
         
-        if (haux != null){ 
-            int numHabitacion = (int) Math.floor(Math.random()*(599-100+1)+100);  
-            Reserva newReserva = new Reserva(haux, numHabitacion, entrada, salida);
         
-            reservas.add(newReserva);
-            
-        }else{
-            error = "Error. No se ha podido añadir el cliente";
-        }
         
-        request.setAttribute("reservas", reservas);
-        request.setAttribute("error", error); 
+        request.setAttribute("huespedes", huespedes);
+        request.setAttribute("tab", "modificarHuespedes"); 
         response.sendRedirect(request.getContextPath());
+        
+        //RequestDispatcher rd = getServletContext().getRequestDispatcher("/main.jsp");
+        //rd.forward(request, response);
        
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -124,4 +130,3 @@ public class ServleAnadirReserva extends HttpServlet {
     }// </editor-fold>
 
 }
-
