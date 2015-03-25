@@ -6,8 +6,12 @@
 
 package servlets;
 
+import hotel.Huesped;
+import hotel.Reserva;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,20 +34,33 @@ public class ServletBuscarReserva extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+      
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletBuscarReserva</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletBuscarReserva at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String error = null;
+        ArrayList<Reserva> reservas = (ArrayList<Reserva>) this.getServletContext().getAttribute("reservas");
+     
+        String nif = request.getParameter("nif");
+        String fentrada = request.getParameter("fentrada");
+        Reserva raux = null;
+        
+        for (Reserva r : reservas) {
+           if (nif.equalsIgnoreCase(r.getCliente().getNif()) && fentrada.equalsIgnoreCase(r.getFentrada())){
+                raux = r;
+                break;
+        }else{
+            error = "Error. No se ha podido encontrar la reserva";
         }
+        }
+         
+        request.setAttribute("reserva", raux);
+        request.setAttribute("tab", "buscarReserva"); 
+        request.setAttribute("error", error); 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");       
+        dispatcher.forward(request, response);
+        
     }
+        
+        
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
