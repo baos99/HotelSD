@@ -11,13 +11,13 @@
 
         <c:import url="/administrarReservas.jsp" charEncoding="utf-8"/>
         
-        <c:import url="/anadirReserva.jsp" charEncoding="utf-8"/>
-        
-        <c:import url="/buscarReserva.jsp" charEncoding="utf-8"/>
-        
         <c:import url="/anadirHuesped.jsp" charEncoding="utf-8"/>
         
         <c:import url="/buscarHuesped.jsp" charEncoding="utf-8"/>
+        
+        <c:import url="/anadirReserva.jsp" charEncoding="utf-8"/>
+        
+        <c:import url="/buscarReserva.jsp" charEncoding="utf-8"/>
     </div>
 </div>
         

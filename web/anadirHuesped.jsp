@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="tab-pane <c:if test="${tab=='anadirHuesped'}">active</c:if> id="anadirHuesped">
-    <div class="col-md-12" id="form">
+<div class="tab-pane <c:if test="${tab=='anadirHuesped'}">active</c:if>" id="anadirHuesped"> 
+<div class="col-md-12" id="form">
         <h1>Nuevo Huesped</h1>
 	<div class="panel panel-default">
 	<div class="panel-body">
