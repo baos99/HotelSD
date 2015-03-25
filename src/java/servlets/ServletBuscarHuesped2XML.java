@@ -6,11 +6,14 @@
 
 package servlets;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import hotel.Huesped;
 import hotel.Reserva;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author german
  */
-public class ServletBuscarHuesped extends HttpServlet {
+public class ServletBuscarHuesped2XML extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +38,7 @@ public class ServletBuscarHuesped extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/xml;charset=UTF-8");
         Huesped haux = null;
         String error = null;
         ArrayList<Huesped> huespedes =  (ArrayList<Huesped>) this.getServletContext().getAttribute("huespedes");
@@ -61,12 +64,15 @@ public class ServletBuscarHuesped extends HttpServlet {
         }else{
             error = "Error. No se ha podido añadir el cliente";
         }
-         
-        request.setAttribute("cliente", haux);
-        request.setAttribute("tab", "buscarHuesped"); 
-        request.setAttribute("error", error); 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");       
-        dispatcher.forward(request, response);
+        
+        try(PrintWriter out = response.getWriter()){
+        XStream xstream = new XStream(new DomDriver());
+        xstream.alias("Huesped", Huesped.class);
+        xstream.toXML(haux, out);
+        }catch(Exception e){
+            
+        };
+        
            
     }
 
