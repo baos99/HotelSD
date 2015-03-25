@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author german
  */
-@WebServlet(name = "buscarHuesped", urlPatterns = {"/buscarHuesped"})
 public class ServletBuscarHuesped extends HttpServlet {
 
     /**
@@ -38,28 +37,36 @@ public class ServletBuscarHuesped extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Huesped haux = null;
+        String error = null;
         ArrayList<Huesped> huespedes =  (ArrayList<Huesped>) this.getServletContext().getAttribute("huespedes");
         ArrayList<Reserva> reservas = (ArrayList<Reserva>) this.getServletContext().getAttribute("reservas");
-        
-        String param= request.getParameter("paramBusqueda");
+     
+        String nif = request.getParameter("nif");
+        String name = request.getParameter("name");
 
-        if (param.equalsIgnoreCase("NIF")) {
+        if (!nif.isEmpty()) {
             for (Huesped h : huespedes) {
                 if (request.getParameter("nif").equalsIgnoreCase(h.getNif())) {
                     haux = h;
                     break;
                 }
             }
-        }else if (param.equalsIgnoreCase("NAME")){
+        }else if (!name.isEmpty()){
             for (Huesped h : huespedes) {
                 if (request.getParameter("name").equalsIgnoreCase(h.getNombre()) && request.getParameter("surname").equalsIgnoreCase(h.getApellidos())){
                     haux = h;
                     break;
                 }
             }
+        }else{
+            error = "Error. No se ha podido añadir el cliente";
         }
          
-        
+        request.setAttribute("cliente", haux);
+        request.setAttribute("tab", "buscarHuesped"); 
+        request.setAttribute("error", error); 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");       
+        dispatcher.forward(request, response);
            
     }
 
