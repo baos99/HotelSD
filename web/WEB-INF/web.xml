@@ -6,11 +6,11 @@
     </listener>
     <servlet>
         <servlet-name>Main</servlet-name>
-        <servlet-class>servlets.Main</servlet-class>
+        <servlet-class>servlets.ServletMain</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>anadirReserva</servlet-name>
-        <servlet-class>servlets.anadirReserva</servlet-class>
+        <servlet-class>servlets.ServleAnadirReserva</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Main</servlet-name>
@@ -18,7 +18,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>anadirHuesped</servlet-name>
-        <servlet-class>servlets.anadirHuesped</servlet-class>
+        <servlet-class>servlets.ServletAnadirHuesped</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>anadirHuesped</servlet-name>

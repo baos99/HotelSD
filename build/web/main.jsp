@@ -7,9 +7,9 @@
 
     <div id="contenido" class="tab-content">
         
-        <c:import url="/administracion.jsp" charEncoding="utf-8"/>
+        <c:import url="/administrarHuespedes.jsp" charEncoding="utf-8"/>
 
-        <c:import url="/estadoHotel.jsp" charEncoding="utf-8"/>
+        <c:import url="/administrarReservas.jsp" charEncoding="utf-8"/>
         
         <c:import url="/anadirReserva.jsp" charEncoding="utf-8"/>
         

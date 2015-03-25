@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javier
  */
-public class Main extends HttpServlet {
+public class ServletMain extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author german
  */
 @WebServlet(name = "anadirReserva", urlPatterns = {"/anadirReserva"})
-public class anadirReserva extends HttpServlet {
+public class ServleAnadirReserva extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

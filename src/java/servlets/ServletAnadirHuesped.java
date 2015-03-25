@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author german
  */
-public class anadirHuesped extends HttpServlet {
+public class ServletAnadirHuesped extends HttpServlet {
 
     /**
 
