@@ -1,25 +1,54 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="tab-pane <c:if test="${tab=='buscarReserva'}">active</c:if> " id="buscarReserva">
-    <h2>reservaaaas</h2>
-    
-    <table border="1">
-            <thead>
-                <tr>
-                    <td><h3># Habitacion</h3></td>
-                    <td><h3>Cliente</h3></td>
-                    <td><h3>Fecha Entrada</h3></td>
-                    <td><h3>Fecha Salida</h3></td>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${reservas}" var="reserva" varStatus="status">
-                    <tr>
-                        <td>${reserva.habitacion}</td>
-                        <td>${reserva.cliente.nombre} ${reserva.cliente.apellidos}</td>
-                        <td>${reserva.fentrada}</td>
-                        <td>${reserva.fsalida}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+    <div class="col-md-12" id="form">
+        <div class="row">
+          <div class="col-md-6" id="form">
+                            <form action="ServletBuscarReserva" method="get">
+                                <div class="form-group">
+                                    <label>NIF</label> <input type="text" name="nif"
+				class="form-control" placeholder="NIF" required/>
+                                    <label>Fecha de entrada</label> <input type="text" name="fentrada"
+				class="form-control" placeholder="Fecha de entrada" required/>
+                                </div>
+                                <button>Búscar</button>
+                            </form>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-12" id="form">
+        <c:if test="${reserva != null}"> 
+            <div class="panel panel-default">
+	<div class="panel-body">
+	<form action="ServletModificarReserva" method="post">
+            <div class="form-group">
+                <label>Número habitacion</label> <input type="text" name="numHab"
+				class="form-control" placeholder="Número habitacion" required value="${reserva.habitacion}"/>
+            </div>
+            <div class="form-group">
+                <label>Nombre Cliente</label> <input type="text" name="name"
+                                                     class="form-control" placeholder="Nombre" required value="${reserva.cliente.nombre}" disabled=""/>
+            </div>
+            <div class="form-group">
+                <label>Fecha de entrada</label> <input type="text" name="fentrada"
+				class="form-control" placeholder="Fecha de entrada" required value="${reserva.fentrada}"/>
+            </div>
+            <div class="form-group">
+                <label>Fecha de salida</label> <input type="text" name="fsalda"
+				class="form-control" placeholder="Fecha de salida" required value="${reserva.fsalida}"/>
+            </div>
+            <button type="submit" class="btn btn-success pull-right">
+                Modificar Reserva <span class="glyphicon glyphicon glyphicon-plus"	aria-hidden="true"></span>
+            </button>
+	</form>
+            <form action="ServletBorrarReserva" method="post">
+                <input type="hidden" name="nif" value="${reserva.cliente.nif}"/>
+                <input type="hidden" name="fentrada" value="${reserva.fentrada}"/>
+                <button type="submit" class="btn btn-danger pull-right">
+                Borrar Reserva <span class="glyphicon glyphicon-trash"	aria-hidden="true"></span>
+            </button>
+            </form>
+	</div>
+        </div>
+        </c:if> 
+    </div>
 </div>

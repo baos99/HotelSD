@@ -4,7 +4,7 @@
     <div class="col-md-12" id="form">
         <div class="row">
           <div class="col-md-6" id="form">
-                            <form action="ServletBuscarHuesped" method="POST">
+                            <form action="ServletBuscarHuesped" method="get">
                                 <div class="form-group">
                                     <label>NIF</label> <input type="text" name="nif"
 				class="form-control" placeholder="NIF" required/>
@@ -13,7 +13,7 @@
                             </form>
           </div>
           <div class="col-md-6" id="form">
-                            <form action="ServletBuscarHuesped" method="POST">
+                            <form action="ServletBuscarHuesped" method="get">
                                 <div class="form-group">
                                     <label for="name">Nombre</label> <input id="name" type="text" name="name"
 				class="form-control" placeholder="Nombre" required/>
@@ -29,7 +29,7 @@
         <c:if test="${cliente != null}"> 
             <div class="panel panel-default">
 	<div class="panel-body">
-	<form action="ServletModificarHuesped" method="get">
+	<form action="ServletModificarHuesped" method="post">
             <div class="form-group">
                 <label>Nombre</label> <input type="text" name="name"
 				class="form-control" placeholder="Nombre" required value="${cliente.nombre}"/>
@@ -80,6 +80,12 @@
                 Modificar Huesped <span class="glyphicon glyphicon glyphicon-plus"	aria-hidden="true"></span>
             </button>
 	</form>
+            <form action="ServletBorrarHuesped" method="post">
+                <input type="hidden" name="nif" value="${cliente.nif}"/>
+                <button type="submit" class="btn btn-danger pull-right">
+                Borrar Huesped <span class="glyphicon glyphicon-trash"	aria-hidden="true"></span>
+            </button>
+            </form>
 	</div>
         </div>
         </c:if> 

@@ -34,7 +34,7 @@ public class ServletBuscarReserva extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
         String format = "html";
@@ -54,10 +54,12 @@ public class ServletBuscarReserva extends HttpServlet {
            if (nif.equalsIgnoreCase(r.getCliente().getNif()) && fentrada.equalsIgnoreCase(r.getFentrada())){
                 raux = r;
                 break;
-        }else{
-            error = "Error. No se ha podido encontrar la reserva";
         }
-        }
+        }  
+           if(raux==null){
+                error = "Error. No se ha podido encontrar la reserva";
+           }
+        
         if(format.equals("html")){
             response.setContentType("text/html;charset=UTF-8");
             request.setAttribute("reserva", raux);
@@ -66,56 +68,20 @@ public class ServletBuscarReserva extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");       
             dispatcher.forward(request, response);
         }else{
-            response.setContentType("text/xml;charset=UTF-8");
-            try(PrintWriter out = response.getWriter()){
-                XStream xstream = new XStream(new DomDriver());
-                xstream.alias("reserva", Reserva.class);
-                xstream.toXML(raux, out);
-            }catch(Exception e){
+            
+            if(error != null){
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            }else{
+            
+                response.setContentType("text/xml;charset=UTF-8");
+                try(PrintWriter out = response.getWriter()){
+                    XStream xstream = new XStream(new DomDriver());
+                    xstream.alias("reserva", Reserva.class);
+                    xstream.toXML(raux, out);
+                }catch(Exception e){}
             
             };
         }
     }
         
-        
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
